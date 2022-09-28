@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+patches:
+- patch: |-
+      apiVersion: batch/v1
+      kind: CronJob
+      metadata:
+        name: ignore
+      spec:
+        suspend: true
+  target:
+    kind: CronJob
+
+resources:
+- ../deploy/cronjob.yaml
+- ../deploy/serviceaccount.yaml
+- deployment.yaml
